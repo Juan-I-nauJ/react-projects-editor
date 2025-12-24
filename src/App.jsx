@@ -15,16 +15,18 @@ function App() {
   const handleAddProject = (newProject) => {
     setProjectArray(old => [...old, newProject])
     handleNewProject(false)
-    handleSelectProject(newProject.id)
+    console.log('handleadd ', projectArray)
+    setSelectedProject(() => newProject)
   }
   const handleSelectProject = (idProject) => {
+    console.log(projectArray, idProject)
     const found = projectArray.find((item) => item.id === idProject)
+    console.log(found)
     setSelectedProject(() => found)
   }
   const handleAddTask = (task) => {
     const indexTask = projectArray.findIndex(item => item.id === selectedProject.id)
     const newSelectedProject = {...selectedProject, tasks: [...selectedProject.tasks, task]}
-    const projectId = selectedProject.id
     setProjectArray(old => {
       return [...old.toSpliced(indexTask, 1, newSelectedProject)]
   })
