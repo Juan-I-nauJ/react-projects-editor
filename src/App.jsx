@@ -15,13 +15,10 @@ function App() {
   const handleAddProject = (newProject) => {
     setProjectArray(old => [...old, newProject])
     handleNewProject(false)
-    console.log('handleadd ', projectArray)
     setSelectedProject(() => newProject)
   }
   const handleSelectProject = (idProject) => {
-    console.log(projectArray, idProject)
     const found = projectArray.find((item) => item.id === idProject)
-    console.log(found)
     setSelectedProject(() => found)
   }
   const handleAddTask = (task) => {
