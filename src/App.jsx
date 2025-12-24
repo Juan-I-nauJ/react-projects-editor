@@ -4,12 +4,15 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import { useState } from 'react'
 
 function App() {
-  const projectArray = []
+  const [projectArray, setProjectArray] = useState([])
   const [selectedProject, setSelectedProject] = useState(null)
   const [formOpen, setFormOpen] = useState(false)
 
   const handleNewProject = (val = true) => {
     setFormOpen(val)
+  }
+  const handleAddProject = (newProject) => {
+    setProjectArray(old => [...old, newProject])
   }
 
   return (
@@ -17,7 +20,7 @@ function App() {
       <Sidebar projectArray={projectArray} onNewProject={handleNewProject}/>
       <main className="pt-32 flex flex-col gap-4 text-center items-center justify-center">
       {(!selectedProject && !formOpen) && <NoProject onNewProject={handleNewProject}/>}
-      {formOpen && <ProjectForm onNewProject={handleNewProject}/>}
+      {formOpen && <ProjectForm cancelProject={handleNewProject} addProject={handleAddProject}/>}
       </main>
     </>
   );
