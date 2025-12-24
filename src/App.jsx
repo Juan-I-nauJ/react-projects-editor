@@ -19,8 +19,8 @@ function App() {
     <>
       <Sidebar projectArray={projectArray} onNewProject={handleNewProject}/>
       <main className="pt-32 flex flex-col gap-4 text-center items-center justify-center">
-      {(!selectedProject && !formOpen) && <NoProject onNewProject={handleNewProject}/>}
-      {formOpen && <ProjectForm cancelProject={handleNewProject} addProject={handleAddProject}/>}
+        {(!selectedProject && !formOpen) && <NoProject onNewProject={handleNewProject}/>}
+        {formOpen && <ProjectForm cancelProject={handleNewProject} addProject={handleAddProject}/>}
       </main>
     </>
   );
