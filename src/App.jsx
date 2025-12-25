@@ -23,10 +23,10 @@ function App() {
   }
   const handleAddTask = (task) => {
     const newTask = {taskTitle: task, id: Math.random().toString(16).slice(2)}
-    const indexTask = projectArray.findIndex(item => item.id === selectedProject.id)
+    const indexProject = projectArray.findIndex(item => item.id === selectedProject.id)
     const newSelectedProject = {...selectedProject, tasks: [...selectedProject.tasks, newTask]}
     setProjectArray(old => {
-      return [...old.toSpliced(indexTask, 1, newSelectedProject)]
+      return [...old.toSpliced(indexProject, 1, newSelectedProject)]
   })
     setSelectedProject(newSelectedProject)
   }
@@ -34,7 +34,13 @@ function App() {
     setSelectedProject(null)
   }
   const handleRemoveTask = (id) => {
-    console.log(id)
+    const indexProject = projectArray.findIndex(item => item.id === selectedProject.id)
+    const taskIdx = selectedProject.tasks.findIndex(item => item.id === id)
+    const updatedProject = {...selectedProject, tasks: [...selectedProject.tasks.toSpliced(taskIdx, 1)] }
+    setProjectArray(old => {
+      return [...old.toSpliced(indexProject, 1, updatedProject)]})
+    setSelectedProject(updatedProject)
+
   }
   const mainControl = () => {
     if (formOpen) return <ProjectForm cancelProject={handleNewProject} addProject={handleAddProject}/>

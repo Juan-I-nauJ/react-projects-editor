@@ -3,7 +3,7 @@ import { useRef } from "react"
 export default function SelectedProject({ onCancel, data, onAddTask, onRemoveTask }) {
     const taskRef = useRef()
     const showTasks = () => {
-        if (!data.tasks) return <p className="text-left">No tasks available</p>
+        if (data.tasks.length < 1) return <p className="text-left">No tasks available</p>
         return <ul>{data.tasks.map(item => <li key={item.id} className="flex justify-around py-4 bg-stone-100">
             <p>
             {item.taskTitle}
