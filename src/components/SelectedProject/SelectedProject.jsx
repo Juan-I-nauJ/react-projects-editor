@@ -1,14 +1,14 @@
 import { useRef } from "react"
 
-export default function SelectedProject({ onCancel, data, onAddTask }) {
+export default function SelectedProject({ onCancel, data, onAddTask, onRemoveTask }) {
     const taskRef = useRef()
     const showTasks = () => {
         if (!data.tasks) return <p className="text-left">No tasks available</p>
-        return <ul>{data.tasks.map(item => <li key={item} className="flex justify-around py-4 bg-stone-100">
+        return <ul>{data.tasks.map(item => <li key={item.id} className="flex justify-around py-4 bg-stone-100">
             <p>
-            {item}
+            {item.taskTitle}
             </p>
-            <button className="cursor-pointer px-4 py-2 text-xs md:text-base rounded-md text-stone-400 hover:text-stone-800 w-16">Clear</button>
+            <button onClick={() => onRemoveTask(item.id)} className="cursor-pointer px-4 py-2 text-xs md:text-base rounded-md text-stone-400 hover:text-stone-800 w-16">Clear</button>
             </li>)}</ul>
     }
     return (

@@ -22,8 +22,9 @@ function App() {
     setSelectedProject(() => found)
   }
   const handleAddTask = (task) => {
+    const newTask = {taskTitle: task, id: Math.random().toString(16).slice(2)}
     const indexTask = projectArray.findIndex(item => item.id === selectedProject.id)
-    const newSelectedProject = {...selectedProject, tasks: [...selectedProject.tasks, task]}
+    const newSelectedProject = {...selectedProject, tasks: [...selectedProject.tasks, newTask]}
     setProjectArray(old => {
       return [...old.toSpliced(indexTask, 1, newSelectedProject)]
   })
@@ -32,9 +33,12 @@ function App() {
   const deSelect = () => {
     setSelectedProject(null)
   }
-    const mainControl = () => {
+  const handleRemoveTask = (id) => {
+    console.log(id)
+  }
+  const mainControl = () => {
     if (formOpen) return <ProjectForm cancelProject={handleNewProject} addProject={handleAddProject}/>
-    if (selectedProject) return <SelectedProject onCancel={deSelect} data={selectedProject} onAddTask={handleAddTask}/>
+    if (selectedProject) return <SelectedProject onCancel={deSelect} data={selectedProject} onAddTask={handleAddTask} onRemoveTask={handleRemoveTask}/>
     return <NoProject onNewProject={handleNewProject}/>
   }
 
