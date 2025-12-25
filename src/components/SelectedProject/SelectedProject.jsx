@@ -1,6 +1,6 @@
 import { useRef } from "react"
 
-export default function SelectedProject({ onCancel, data, onAddTask, onRemoveTask }) {
+export default function SelectedProject({ data, onRemoveProject,  onAddTask, onRemoveTask }) {
     const taskRef = useRef()
     const showTasks = () => {
         if (data.tasks.length < 1) return <p className="text-left">No tasks available</p>
@@ -15,7 +15,7 @@ export default function SelectedProject({ onCancel, data, onAddTask, onRemoveTas
         <>
             <header className="flex w-4xl items-start gap-8 relative">
                 <h1 className="text-stone-600 font-semibold text-3xl">{data.title}</h1>
-                <button onClick={onCancel} className="cursor-pointer px-4 py-2 text-xs md:text-base rounded-md text-stone-400 hover:text-stone-800 w-32 absolute right-0">Delete</button>
+                <button onClick={onRemoveProject} className="cursor-pointer px-4 py-2 text-xs md:text-base rounded-md text-stone-400 hover:text-stone-800 w-32 absolute right-0">Delete</button>
             </header>
             <section className="w-4xl flex flex-col gap-16">
                 <p className="text-stone-400 text-left">{new Date(data.date).toUTCString()}</p>

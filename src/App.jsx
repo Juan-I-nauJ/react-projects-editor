@@ -21,6 +21,14 @@ function App() {
     const found = projectArray.find((item) => item.id === idProject)
     setSelectedProject(() => found)
   }
+  const handleRemoveProject = () => {
+    const indexProject = projectArray.findIndex(item => item.id === selectedProject.id)
+    setProjectArray(old => {
+      return [...old.toSpliced(indexProject, 1)]
+  })
+    deSelect()
+  }
+
   const handleAddTask = (task) => {
     const newTask = {taskTitle: task, id: Math.random().toString(16).slice(2)}
     const indexProject = projectArray.findIndex(item => item.id === selectedProject.id)
@@ -44,7 +52,7 @@ function App() {
   }
   const mainControl = () => {
     if (formOpen) return <ProjectForm cancelProject={handleNewProject} addProject={handleAddProject}/>
-    if (selectedProject) return <SelectedProject onCancel={deSelect} data={selectedProject} onAddTask={handleAddTask} onRemoveTask={handleRemoveTask}/>
+    if (selectedProject) return <SelectedProject data={selectedProject} onRemoveProject={handleRemoveProject} onAddTask={handleAddTask} onRemoveTask={handleRemoveTask}/>
     return <NoProject onNewProject={handleNewProject}/>
   }
 
