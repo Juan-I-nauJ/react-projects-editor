@@ -1,15 +1,24 @@
 import { useRef } from "react"
 
-export default function SelectedProject({ data, onRemoveProject,  onAddTask, onRemoveTask }) {
+export default function SelectedProject({ data, onRemoveProject, onAddTask, onRemoveTask }) {
     const taskRef = useRef()
     const showTasks = () => {
         if (data.tasks.length < 1) return <p className="text-left">No tasks available</p>
         return <ul>{data.tasks.map(item => <li key={item.id} className="flex justify-around py-4 bg-stone-100">
             <p>
-            {item.taskTitle}
+                {item.taskTitle}
             </p>
             <button onClick={() => onRemoveTask(item.id)} className="cursor-pointer px-4 py-2 text-xs md:text-base rounded-md text-stone-400 hover:text-stone-800 w-16">Clear</button>
-            </li>)}</ul>
+        </li>)}</ul>
+    }
+    const formatDate = (date) => {
+        const formattedDate = new Intl.DateTimeFormat('en-GB', {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        }).format(date)
+        return formattedDate
     }
     return (
         <>
@@ -18,7 +27,7 @@ export default function SelectedProject({ data, onRemoveProject,  onAddTask, onR
                 <button onClick={onRemoveProject} className="cursor-pointer px-4 py-2 text-xs md:text-base rounded-md text-stone-400 hover:text-stone-800 w-32 absolute right-0">Delete</button>
             </header>
             <section className="w-4xl flex flex-col gap-16">
-                <p className="text-stone-400 text-left">{new Date(data.date).toUTCString()}</p>
+                <p className="text-stone-400 text-left">{formatDate(new Date(data.date))}</p>
                 <p className="text-left">{data.desc}</p>
             </section>
             <hr className="border-stone-700 w-4xl" />

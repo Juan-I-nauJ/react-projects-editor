@@ -1,6 +1,12 @@
 import { createPortal } from "react-dom"
 
-export default function Sidebar({projectArray, onNewProject, onSelectProject}) {
+export default function Sidebar({projectArray, onNewProject, onSelectProject, selectedProject}) {
+
+    const buttonClasses = (id) => {
+        let classList = 'pl-2 pr-4 py-2 text-xs md:text-base text-stone-400 hover:text-stone-200 hover:bg-stone-600 w-38 text-left'
+        if (selectedProject.id === id) classList += ' bg-stone-600 text-stone-200'
+        return classList
+    }
     return createPortal(
         <aside className="fixed left-0 top-0 bottom-0 w-64 bg-neutral-900 text-amber-100 flex flex-col gap-8">
             <div className="flex flex-col gap-4 ml-8">
@@ -10,7 +16,7 @@ export default function Sidebar({projectArray, onNewProject, onSelectProject}) {
             <menu className="ml-8 flex flex-col gap-4 justify-center">
                 {projectArray.map(item => {
                     return <li key={item.id}>
-                        <button onClick={() => onSelectProject(item.id)} className="pl-2 pr-4 py-2 text-xs md:text-base text-stone-400 hover:text-stone-200 hover:bg-stone-600 w-38 text-left">
+                        <button onClick={() => onSelectProject(item.id)} className={buttonClasses(item.id)}>
                             {item.title}
                         </button>
                     </li>

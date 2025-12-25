@@ -58,7 +58,7 @@ function App() {
 
   return (
     <>
-      <Sidebar projectArray={projectArray} onNewProject={handleNewProject} onSelectProject={handleSelectProject}/>
+      <Sidebar projectArray={projectArray} onNewProject={handleNewProject} onSelectProject={handleSelectProject} selectedProject={selectedProject}/>
       <main className="pt-32 flex flex-col gap-4 text-center items-center justify-center">
         {mainControl()}
       </main>
